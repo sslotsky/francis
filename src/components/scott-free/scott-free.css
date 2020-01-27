@@ -9,6 +9,7 @@ ul {
       border: 1px solid black;
       width: 2em;
       height: 8em;
+      z-index: 1;
 
       &.f,
       &.c {
@@ -30,6 +31,7 @@ ul {
       background-color: black;
       width: 1.5em;
       height: 6em;
+      z-index: 2;
     }
   }
 }

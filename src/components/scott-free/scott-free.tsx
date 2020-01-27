@@ -60,11 +60,11 @@ const keys = [
 export class MyComponent {
   @Prop() octaves: number = 3;
 
+  ctx: AudioContext = new AudioContext();
   player: Soundfont.Player;
 
   componentWillLoad() {
-    const ctx = new AudioContext();
-    Soundfont.instrument(ctx, "clavinet").then(clavinet => {
+    Soundfont.instrument(this.ctx, "clavinet").then(clavinet => {
       this.player = clavinet;
     });
   }
@@ -73,7 +73,11 @@ export class MyComponent {
     const key = e.srcElement as HTMLLIElement;
     const note = key.dataset["key"];
     const octave = key.dataset["octave"];
-    this.player.play(`${note}${parseInt(octave, 10) + 2}`);
+    this.player.play(
+      `${note}${parseInt(octave, 10) + 2}`,
+      this.ctx.currentTime,
+      { duration: 1.5 }
+    );
   };
 
   render() {
