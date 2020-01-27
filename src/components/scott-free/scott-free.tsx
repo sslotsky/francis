@@ -1,6 +1,57 @@
 import { Component, Prop, h } from "@stencil/core";
 import Soundfont from "soundfont-player";
 
+const keys = [
+  {
+    note: "C",
+    color: "white"
+  },
+  {
+    note: "C#",
+    color: "black"
+  },
+  {
+    note: "D",
+    color: "white"
+  },
+  {
+    note: "D#",
+    color: "black"
+  },
+  {
+    note: "E",
+    color: "white"
+  },
+  {
+    note: "F",
+    color: "white"
+  },
+  {
+    note: "F#",
+    color: "black"
+  },
+  {
+    note: "G",
+    color: "white"
+  },
+  {
+    note: "G#",
+    color: "black"
+  },
+  {
+    note: "A",
+    color: "white"
+  },
+  {
+    note: "A#",
+    color: "black"
+  },
+  {
+    note: "B",
+    color: "white"
+  }
+];
+
 @Component({
   tag: "scott-free",
   styleUrl: "scott-free.css",
@@ -30,80 +81,16 @@ export class MyComponent {
 
     return (
       <ul>
-        {octaves.map(octave => [
-          <li
-            class="white c"
-            data-key="C"
-            data-octave={octave + 1}
-            onClick={this.playSound}
-          />,
-          <li
-            class="black"
-            data-key="C#"
-            data-octave={octave + 1}
-            onClick={this.playSound}
-          />,
-          <li
-            class="white d"
-            data-key="D"
-            data-octave={octave + 1}
-            onClick={this.playSound}
-          />,
-          <li
-            class="black"
-            data-key="D#"
-            data-octave={octave + 1}
-            onClick={this.playSound}
-          />,
-          <li
-            class="white e"
-            data-key="E"
-            data-octave={octave + 1}
-            onClick={this.playSound}
-          />,
-          <li
-            class="white f"
-            data-key="F"
-            data-octave={octave + 1}
-            onClick={this.playSound}
-          />,
-          <li
-            class="black"
-            data-key="F#"
-            data-octave={octave + 1}
-            onClick={this.playSound}
-          />,
-          <li
-            class="white g"
-            data-key="G"
-            data-octave={octave + 1}
-            onClick={this.playSound}
-          />,
-          <li
-            class="black"
-            data-key="G#"
-            data-octave={octave + 1}
-            onClick={this.playSound}
-          />,
-          <li
-            class="white a"
-            data-key="A"
-            data-octave={octave + 1}
-            onClick={this.playSound}
-          />,
-          <li
-            class="black"
-            data-key="A#"
-            data-octave={octave + 1}
-            onClick={this.playSound}
-          />,
-          <li
-            class="white b"
-            data-key="B"
-            data-octave={octave + 1}
-            onClick={this.playSound}
-          />
-        ])}
+        {octaves.map(octave =>
+          keys.map(key => (
+            <li
+              class={`${key.color} ${key.note.toLocaleLowerCase()}`}
+              data-key={key.note}
+              data-octave={octave + 1}
+              onClick={this.playSound}
+            />
+          ))
+        )}
       </ul>
     );
   }
