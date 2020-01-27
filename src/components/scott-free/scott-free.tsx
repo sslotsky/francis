@@ -91,7 +91,7 @@ export class MyComponent {
               class={`${key.color} ${key.note.toLocaleLowerCase()}`}
               data-key={key.note}
               data-octave={octave + 1}
-              onClick={this.playSound}
+              onMouseDown={this.playSound}
             />
           ))
         )}
