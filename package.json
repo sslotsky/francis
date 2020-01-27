@@ -26,5 +26,8 @@
     "@stencil/postcss": "^1.0.1",
     "postcss-preset-env": "^6.7.0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "soundfont-player": "github:danigb/soundfont-player#a006e16e628fe936f80716885212d4749805de7b"
+  }
 }
