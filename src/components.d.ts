@@ -10,6 +10,7 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
+  interface LiveJazz {}
   interface ScottFree {
     'octaves': number;
   }
@@ -18,22 +19,31 @@ export namespace Components {
 declare global {
 
 
+  interface HTMLLiveJazzElement extends Components.LiveJazz, HTMLStencilElement {}
+  var HTMLLiveJazzElement: {
+    prototype: HTMLLiveJazzElement;
+    new (): HTMLLiveJazzElement;
+  };
+
   interface HTMLScottFreeElement extends Components.ScottFree, HTMLStencilElement {}
   var HTMLScottFreeElement: {
     prototype: HTMLScottFreeElement;
     new (): HTMLScottFreeElement;
   };
   interface HTMLElementTagNameMap {
+    'live-jazz': HTMLLiveJazzElement;
     'scott-free': HTMLScottFreeElement;
   }
 }
 
 declare namespace LocalJSX {
+  interface LiveJazz {}
   interface ScottFree {
     'octaves'?: number;
   }
 
   interface IntrinsicElements {
+    'live-jazz': LiveJazz;
     'scott-free': ScottFree;
   }
 }
@@ -44,6 +54,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
+      'live-jazz': LocalJSX.LiveJazz & JSXBase.HTMLAttributes<HTMLLiveJazzElement>;
       'scott-free': LocalJSX.ScottFree & JSXBase.HTMLAttributes<HTMLScottFreeElement>;
     }
   }
