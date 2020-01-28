@@ -1,13 +1,23 @@
 import { Component, h, State } from "@stencil/core";
 import Soundfont from "soundfont-player";
 
+import { keys } from "../../utils";
+
+function getNote(n: number) {
+  return {
+    note: keys[n % 12].note,
+    octave: Math.floor(n / 12) - 1
+  };
+}
+
 @Component({
   tag: "live-jazz",
   shadow: true
 })
-export class MyComponent {
+export class LiveJazz {
   @State() access: WebMidi.MIDIAccess;
   @State() inputId: string;
+  @State() activeNotes: string[] = [];
 
   ctx: AudioContext;
   player: Soundfont.Player;
@@ -25,11 +35,22 @@ export class MyComponent {
     this.inputId = el.value;
     this.player.listenToMidi(this.access.inputs.get(this.inputId));
     this.player.on("start", (...args: number[]) => {
-      console.log(args[1]);
+      const { note, octave } = getNote(args[1]);
+      this.activeNotes = this.activeNotes.concat(`${note}${octave}`);
+    });
+
+    this.player.on("stop", (...args: number[]) => {
+      const { note, octave } = getNote(args[1]);
+      this.activeNotes = this.activeNotes.filter(n => n !== `${note}${octave}`);
     });
   };
 
   render() {
+    if (this.inputId) {
+      console.log(this.activeNotes);
+      return <scott-free activeNotes={this.activeNotes}></scott-free>;
+    }
+
     return navigator.requestMIDIAccess ? (
       this.access ? (
         this.access.inputs.size === 0 ? (

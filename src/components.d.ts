@@ -12,6 +12,14 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 export namespace Components {
   interface LiveJazz {}
   interface ScottFree {
+    'activeNotes': string[];
+    'octaves': number;
+    'playSound': (
+    note: string,
+    octave: number
+    ) => () => void;
+  }
+  interface ThemKeys {
     'octaves': number;
   }
 }
@@ -30,21 +38,37 @@ declare global {
     prototype: HTMLScottFreeElement;
     new (): HTMLScottFreeElement;
   };
+
+  interface HTMLThemKeysElement extends Components.ThemKeys, HTMLStencilElement {}
+  var HTMLThemKeysElement: {
+    prototype: HTMLThemKeysElement;
+    new (): HTMLThemKeysElement;
+  };
   interface HTMLElementTagNameMap {
     'live-jazz': HTMLLiveJazzElement;
     'scott-free': HTMLScottFreeElement;
+    'them-keys': HTMLThemKeysElement;
   }
 }
 
 declare namespace LocalJSX {
   interface LiveJazz {}
   interface ScottFree {
+    'activeNotes'?: string[];
+    'octaves'?: number;
+    'playSound'?: (
+    note: string,
+    octave: number
+    ) => () => void;
+  }
+  interface ThemKeys {
     'octaves'?: number;
   }
 
   interface IntrinsicElements {
     'live-jazz': LiveJazz;
     'scott-free': ScottFree;
+    'them-keys': ThemKeys;
   }
 }
 
@@ -56,6 +80,7 @@ declare module "@stencil/core" {
     interface IntrinsicElements {
       'live-jazz': LocalJSX.LiveJazz & JSXBase.HTMLAttributes<HTMLLiveJazzElement>;
       'scott-free': LocalJSX.ScottFree & JSXBase.HTMLAttributes<HTMLScottFreeElement>;
+      'them-keys': LocalJSX.ThemKeys & JSXBase.HTMLAttributes<HTMLThemKeysElement>;
     }
   }
 }
