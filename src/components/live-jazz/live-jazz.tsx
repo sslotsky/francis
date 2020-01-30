@@ -48,7 +48,9 @@ export class LiveJazz {
   render() {
     if (this.inputId) {
       console.log(this.activeNotes);
-      return <scott-free activeNotes={this.activeNotes}></scott-free>;
+      return (
+        <scott-free octaves={5} activeNotes={this.activeNotes}></scott-free>
+      );
     }
 
     return navigator.requestMIDIAccess ? (
