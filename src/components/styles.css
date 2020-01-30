@@ -24,6 +24,7 @@ select {
     hsl(300, 100%, 76%) 100%
   );
   color: white;
+  font-family: var(--font-family);
 
   & option {
     color: black;
