@@ -1,7 +1,7 @@
 {
-  "name": "francis",
+  "name": "live-jazz",
   "version": "0.0.1",
-  "description": "Stencil Component Starter",
+  "description": "Virtual piano web components",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "es2015": "dist/esm/index.mjs",
@@ -29,6 +29,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "soundfont-player": "github:danigb/soundfont-player#a006e16e628fe936f80716885212d4749805de7b"
+    "soundfont-player": "^0.12.0"
   }
 }
