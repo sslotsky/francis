@@ -8,11 +8,28 @@
     />
     <title>Stencil Component Starter</title>
 
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --font-family: "Roboto Slab", serif;
+      }
+
+      main {
+        display: grid;
+        place-content: center;
+        height: 100vh;
+      }
+    </style>
+
     <script type="module" src="/build/francis.esm.js"></script>
     <script nomodule src="/build/francis.js"></script>
   </head>
   <body>
-    <live-jazz></live-jazz>
-    <them-keys></them-keys>
+    <main>
+      <live-jazz></live-jazz>
+    </main>
   </body>
 </html>

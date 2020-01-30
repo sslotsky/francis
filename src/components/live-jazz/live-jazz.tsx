@@ -12,6 +12,7 @@ function getNote(n: number) {
 
 @Component({
   tag: "live-jazz",
+  styleUrl: "../styles.css",
   shadow: true
 })
 export class LiveJazz {
@@ -60,7 +61,7 @@ export class LiveJazz {
         ) : (
           <select onChange={this.setInput}>
             {[...this.access.inputs.values()].map(input => [
-              <option hidden>Select a MIDI input</option>,
+              <option hidden>Select a MIDI input &#8681;</option>,
               <option value={input.id}>{input.name}</option>
             ])}
           </select>

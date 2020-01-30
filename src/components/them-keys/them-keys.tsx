@@ -2,8 +2,7 @@ import { Component, Prop, State, h } from "@stencil/core";
 import Soundfont from "soundfont-player";
 
 @Component({
-  tag: "them-keys",
-  shadow: true
+  tag: "them-keys"
 })
 export class ThemKeys {
   @Prop() octaves: number = 3;
