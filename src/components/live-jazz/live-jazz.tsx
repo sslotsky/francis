@@ -12,7 +12,7 @@ function getNote(n: number) {
 
 @Component({
   tag: "live-jazz",
-  styleUrl: "../styles.css",
+  styleUrls: ["../styles.css", "styles.css"],
   shadow: true
 })
 export class LiveJazz {
@@ -31,9 +31,8 @@ export class LiveJazz {
     });
   };
 
-  setInput = (e: Event) => {
-    const el = e.srcElement as HTMLSelectElement;
-    this.inputId = el.value;
+  setInput = (id: string) => () => {
+    this.inputId = id;
     this.player.listenToMidi(this.access.inputs.get(this.inputId));
     this.player.on("start", (...args: number[]) => {
       const { note, octave } = getNote(args[1]);
@@ -59,12 +58,13 @@ export class LiveJazz {
         this.access.inputs.size === 0 ? (
           <p>No MIDI inputs detected</p>
         ) : (
-          <select onChange={this.setInput}>
+          <div class="inputs">
             {[...this.access.inputs.values()].map(input => [
-              <option hidden>Select a MIDI input &#8681;</option>,
-              <option value={input.id}>{input.name}</option>
+              <button type="button" onClick={this.setInput(input.id)}>
+                Use {input.name}
+              </button>
             ])}
-          </select>
+          </div>
         )
       ) : (
         <button type="button" onClick={this.start}>

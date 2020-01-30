@@ -10,23 +10,3 @@ button {
   border-radius: 5px;
   font-family: var(--font-family);
 }
-
-select {
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  -ms-progress-appearance: none;
-  font-size: 3rem;
-  border-radius: 5px;
-  padding: 1rem;
-  background: linear-gradient(
-    to bottom right,
-    hsl(300, 100%, 47%) 0%,
-    hsl(300, 100%, 76%) 100%
-  );
-  color: white;
-  font-family: var(--font-family);
-
-  & option {
-    color: black;
-  }
-}
