@@ -2,3 +2,8 @@ div.inputs {
   display: grid;
   grid-gap: 1rem;
 }
+
+p.notice {
+  font-size: 3rem;
+  text-align: center;
+}

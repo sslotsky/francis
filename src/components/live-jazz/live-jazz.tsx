@@ -95,6 +95,13 @@ export class LiveJazz {
       }
     }
 
-    return "not supported";
+    return [
+      <p class="notice">Your browser does not support Web MIDI.</p>,
+      <p class="notice">
+        <a target="_blank" href="https://www.google.com/chrome/">
+          Please try Chrome browser instead.
+        </a>
+      </p>
+    ];
   }
 }
