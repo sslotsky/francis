@@ -67,7 +67,6 @@ ul {
       }
     }
     &.black {
-      background-color: black;
       width: 1.5em;
       height: 6em;
       z-index: 2;

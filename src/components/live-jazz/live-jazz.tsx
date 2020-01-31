@@ -26,12 +26,17 @@ export class LiveJazz {
   player: Soundfont.Player;
 
   start = async () => {
-    this.starting = true;
+    const t = setTimeout(() => {
+      this.starting = true;
+    }, 500);
+
     this.ctx = new AudioContext();
     this.player = await Soundfont.instrument(this.ctx, "electric_piano_2");
     this.access = await navigator.requestMIDIAccess({
       sysex: true
     });
+
+    clearTimeout(t);
     this.starting = false;
   };
 
