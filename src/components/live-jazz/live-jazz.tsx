@@ -1,4 +1,4 @@
-import { Component, h, State } from "@stencil/core";
+import { Component, h, State, getAssetPath } from "@stencil/core";
 import Soundfont from "soundfont-player";
 
 import { keys } from "../../utils";
@@ -13,22 +13,26 @@ function getNote(n: number) {
 @Component({
   tag: "live-jazz",
   styleUrls: ["../styles.css", "styles.css"],
+  assetsDir: "../../assets",
   shadow: true
 })
 export class LiveJazz {
   @State() access: WebMidi.MIDIAccess;
   @State() inputId: string;
   @State() activeNotes: string[] = [];
+  @State() starting: boolean;
 
   ctx: AudioContext;
   player: Soundfont.Player;
 
   start = async () => {
+    this.starting = true;
     this.ctx = new AudioContext();
-    this.player = await Soundfont.instrument(this.ctx, "clavinet");
+    this.player = await Soundfont.instrument(this.ctx, "electric_piano_2");
     this.access = await navigator.requestMIDIAccess({
       sysex: true
     });
+    this.starting = false;
   };
 
   setInput = (id: string) => () => {
@@ -46,33 +50,46 @@ export class LiveJazz {
   };
 
   render() {
+    if (this.starting) {
+      return (
+        <img
+          alt="Spinning Notes"
+          class="spin"
+          src={getAssetPath("../../assets/notes.png")}
+        />
+      );
+    }
+
     if (this.inputId) {
-      console.log(this.activeNotes);
       return (
         <scott-free octaves={5} activeNotes={this.activeNotes}></scott-free>
       );
     }
 
-    return navigator.requestMIDIAccess ? (
-      this.access ? (
-        this.access.inputs.size === 0 ? (
-          <p>No MIDI inputs detected</p>
-        ) : (
-          <div class="inputs">
-            {[...this.access.inputs.values()].map(input => [
-              <button type="button" onClick={this.setInput(input.id)}>
-                Use {input.name}
-              </button>
-            ])}
-          </div>
-        )
-      ) : (
-        <button type="button" onClick={this.start}>
-          Start
-        </button>
-      )
-    ) : (
-      "not supported"
-    );
+    if (navigator.requestMIDIAccess) {
+      if (this.access) {
+        if (this.access.inputs.size === 0) {
+          return <p>No MIDI inputs detected</p>;
+        } else {
+          return (
+            <div class="inputs">
+              {[...this.access.inputs.values()].map(input => [
+                <button type="button" onClick={this.setInput(input.id)}>
+                  Use {input.name}
+                </button>
+              ])}
+            </div>
+          );
+        }
+      } else {
+        return (
+          <button type="button" onClick={this.start}>
+            Start
+          </button>
+        );
+      }
+    }
+
+    return "not supported";
   }
 }

@@ -10,3 +10,15 @@ button {
   border-radius: 5px;
   font-family: var(--font-family);
 }
+
+@keyframes spin {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+.spin {
+  animation: spin 2s infinite;
+}
