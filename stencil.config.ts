@@ -3,7 +3,7 @@ import { postcss } from "@stencil/postcss";
 import postCSSPresetEnv from "postcss-preset-env";
 
 export const config: Config = {
-  namespace: "francis",
+  namespace: "live-jazz",
   plugins: [
     postcss({
       plugins: [
